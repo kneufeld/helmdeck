@@ -1,0 +1,7 @@
+__title__        = 'helmdeck'
+__version__      = '0.0.1'
+__author__       = 'Kurt Neufeld'
+__author_email__ = 'kneufeld@burgundywall.com'
+__license__      = 'MIT License'
+__url__          = 'https://github.com/kneufeld/helmdeck'
+__copyright__    = 'Copyright 2021 Kurt Neufeld'
