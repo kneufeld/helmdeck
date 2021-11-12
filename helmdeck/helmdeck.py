@@ -1,8 +1,6 @@
-import asyncio
+from streamdeckui import Deck
 
-from streamdeckui import Deck, Page
-from streamdeckui import Key
-from streamdeckui.page import GreatWavePage, NumberedPage, ErrorPage
+from .pages import GreatWavePage, NumberedPage, ErrorPage
 
 async def main(loop, deck, opts):
 
@@ -15,4 +13,4 @@ async def main(loop, deck, opts):
 
     deck.turn_on()
 
-    await deck.wait()
+    await deck.block_until_quit()

@@ -70,8 +70,13 @@ def show_deck_info(deck):
     row, col = deck.key_layout()
     logger.debug(f"    Key Count: {deck.key_count()} (in a {row}x{col} grid)")
 
-    x, y = deck.key_image_format()['size']
+    format = deck.key_image_format()
+
+    x, y = format['size']
     logger.debug(f"    Key Images: {x}x{y} pixels")
+    logger.debug(f"    Rotation : {format['rotation']}")
+    logger.debug(f"    Format   : {format['format']}")
+    logger.debug(f"    Flip     : {format['flip']}")
 
 def choose_deck(ctx, param, value):
     streamdecks = DeviceManager().enumerate()
