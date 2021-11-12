@@ -124,16 +124,17 @@ def cli(ctx, deck, **opts):
 
     import asyncio
     from .helmdeck import main
-    from streamdeckui import Deck, Page, Key
+    # from streamdeckui import Deck, Page, Key
 
     try:
         loop = asyncio.get_event_loop()
-        deck = Deck(deck, clear=opts['clear'], loop=loop) # convert to deck ui
-        loop.run_until_complete(main(loop, deck))
+        # deck = Deck(deck, clear=opts['clear'], loop=loop) # convert to deck ui
+        loop.run_until_complete(main(loop, deck, opts))
     except KeyboardInterrupt:
         logger.warning("ctrl-c quitting")
     finally:
-        deck.release()
+        pass
+        # deck.release()
 
 if __name__ == "__main__":
     cli()
