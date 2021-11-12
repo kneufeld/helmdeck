@@ -58,8 +58,12 @@ def show_version(ctx, param, value):
     ctx.exit()
 
 def show_deck_info(deck):
+    deck_id = deck.id()
+    if len(deck_id) > 60:
+        deck_id = f"{deck_id[:30]}...{deck_id[-30:]}"
+
     logger.debug(f"Deck: {deck.index} - {deck.deck_type()}")
-    logger.debug(f"    ID: {deck.id()}")
+    logger.debug(f"    ID: {deck_id}")
     logger.debug(f"    Serial: {deck.get_serial_number()}")
     logger.debug(f"    Firmware: {deck.get_firmware_version()}")
 
