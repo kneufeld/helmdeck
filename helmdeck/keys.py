@@ -1,7 +1,7 @@
 import aiohttp
 
 from streamdeckui import Key
-from streamdeckui.mixins import QuitKeyMixin
+from streamdeckui.mixins import QuitKeyMixin, BackKeyMixin
 
 import logging
 logger = logging.getLogger(__name__)
@@ -42,15 +42,11 @@ class UrlKey(Key):
                 return aiohttp.web.Response(status=499)
 
 
-class BackKey(Key):
+class BackKey(BackKeyMixin, Key):
 
     def __init__(self, page, **kw):
         super().__init__(page, **kw)
         self.set_image(Key.UP, 'assets/back.png')
-
-    async def cb_key_up(self, *args, **kw):
-        self.state = Key.UP
-        self.deck.prev_page()
 
 
 class SwitchKey(Key):
