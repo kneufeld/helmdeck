@@ -1,40 +1,15 @@
 import aiohttp
 
 from streamdeckui import Key
+from streamdeckui.mixins import QuitKeyMixin
 
 import logging
 logger = logging.getLogger(__name__)
 
-class NumberKey(Key):
-    """
-    dev page, show key index as text
-    any key exits
-    """
-
-    def __init__(self, page, **kw):
-        super().__init__(page, **kw)
-
-        # can't call self.index until after it's been added to page
-        self.deck._loop.call_soon(self._add_label)
-
-    def _add_label(self):
-        index = self.index
-
-        if index < 0:
-            return
-
-        self.add_label(Key.UP, str(index), False)
-
-
-class QuitKey(Key):
+class QuitKey(QuitKeyMixin, Key):
     def __init__(self, page, **kw):
         super().__init__(page, **kw)
         self.set_image(Key.UP, 'assets/exit.png')
-
-    async def key_up(self, *args, **kw):
-        logger.info("you pushed the exit key")
-        self.deck._quit_future.set_result(None)
-
 
 class UrlKey(Key):
 
@@ -44,7 +19,7 @@ class UrlKey(Key):
         self.set_image('fetch', 'assets/safari-icon.png')
         self.set_image('error', 'assets/error.png')
 
-    async def key_up(self, *args, **kw):
+    async def cb_key_up(self, *args, **kw):
         resp = await self.fetch(self._url)
         logger.info(f"GET: {self._url}: {resp.status}")
 
@@ -73,7 +48,7 @@ class BackKey(Key):
         super().__init__(page, **kw)
         self.set_image(Key.UP, 'assets/back.png')
 
-    async def key_up(self, *args, **kw):
+    async def cb_key_up(self, *args, **kw):
         self.state = Key.UP
         self.deck.prev_page()
 
@@ -84,6 +59,6 @@ class SwitchKey(Key):
         super().__init__(page, **kw)
         self._to_page = to_page
 
-    async def key_up(self, *args, **kw):
+    async def cb_key_up(self, *args, **kw):
         self.state = Key.UP
         self.deck.change_page(self._to_page)

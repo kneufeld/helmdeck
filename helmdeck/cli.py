@@ -133,17 +133,20 @@ def cli(ctx, deck, **opts):
 
     import asyncio
     from .helmdeck import main
-    # from streamdeckui import Deck, Page, Key
+    from streamdeckui import Deck
+
+    # KN: I don't like creating the Deck object here as opposed to
+    # in main() but on a ctrl-c the exception is here, not in main()
+    # so there is no way to call deck.release()
 
     try:
         loop = asyncio.get_event_loop()
-        # deck = Deck(deck, clear=opts['clear'], loop=loop) # convert to deck ui
-        loop.run_until_complete(main(loop, deck, opts))
+        deck = Deck(deck, clear=opts['clear'], loop=loop) # convert to deck ui
+        loop.run_until_complete(main(deck, opts, loop))
     except KeyboardInterrupt:
         logger.warning("ctrl-c quitting")
     finally:
-        pass
-        # deck.release()
+        deck.release()
 
 if __name__ == "__main__":
     cli()

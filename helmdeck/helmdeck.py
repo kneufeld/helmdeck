@@ -1,10 +1,14 @@
+import asyncio
+
 from streamdeckui import Deck
 
 from .pages import GreatWavePage, NumberedPage, ErrorPage
 
-async def main(loop, deck, opts):
+import logging
+logger = logging.getLogger(__name__)
 
-    deck = Deck(deck, clear=opts['clear'], loop=loop) # convert to deck ui
+async def main(deck, opts, loop):
+
     deck.add_page('greatwave', GreatWavePage(deck, None))
     deck.add_page('numbers', NumberedPage(deck, None))
     deck.add_page('errorpage', ErrorPage(deck, None))
