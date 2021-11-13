@@ -1,4 +1,4 @@
-# Wave Deck (name is a work in progress)
+# Helm Deck
 
 A dashboard/controller for a boat.
 
@@ -6,42 +6,26 @@ Show some simple status and have buttons control aspects of the ship via
 REST calls and/or NMEA2000 packets. Also has a webserver to receive API
 calls.
 
-## Potential better names
-
-* RiverDash
-* BrookHull
-* HelmDeck
-* HelmsDeep
-* Helminator (not really)
+This is currently a work in progress and should not be used for anything
+except example code and maybe not even for that.
 
 ## Docs
 
 * https://python-elgato-streamdeck.readthedocs.io/en/stable/index.html
 * https://github.com/abcminiuser/python-elgato-streamdeck
+* https://github.com/kneufeld/streamdeckui
 
+If you're looking for example code for `streamdeckui` see [helmdeck/helmdeck.py](helmdeck/helmdeck.py)
 
 ## Installation
 
+```
+pip install -e .
+```
+
 See [this](https://python-elgato-streamdeck.readthedocs.io/en/stable/pages/installation.html)
-but the _tl;dr_ is...
+for more info regarding getting `streamdeck` working.
 
-### OSX
-
-```bash
-brew install hidapi
-```
-
-### Linux
-
-```bash
-# system packages needed for the default LibUSB HIDAPI backend
-apt install -y libudev-dev libusb-1.0-0-dev libhidapi-libusb0
-
-# system packages needed for the Python Pillow package installation
-apt install -y libjpeg-dev zlib1g-dev libopenjp2-7 libtiff5
-
-# some udev shinanigans...
-```
 
 ## Goals
 
