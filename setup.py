@@ -39,11 +39,9 @@ setup(
 
     install_requires=[
         'click<9',
-        'streamdeck',
         'setproctitle',
-        # https://github.com/gomymove/blinker has code examples for async
-        # has async support but not in pypi yet
-        'git+https://github.com/jek/blinker.git',
+        'streamdeckui',
+        'aiohttp',
     ],
 
     extras_require = {
