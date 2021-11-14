@@ -1,4 +1,5 @@
 import aiohttp
+import aiohttp.web
 
 from streamdeckui import Key
 from streamdeckui.mixins import QuitKeyMixin, BackKeyMixin
